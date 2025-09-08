@@ -1,0 +1,6 @@
+flask
+numpy
+librosa
+soundfile
+tensorflow
+werkzeug
