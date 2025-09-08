@@ -2,20 +2,13 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./client/**/*.{ts,tsx}"],
+  content: ["./client/**/*.{ts,tsx,js,jsx}"],
   prefix: "",
   theme: {
-    fontFamily: {
-      sans: ["Inter", "ui-sans-serif", "system-ui"],
-    },
     container: {
       center: true,
-      padding: "1.5rem",
+      padding: "2rem",
       screens: {
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
         "2xl": "1400px",
       },
     },
@@ -29,22 +22,6 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        violet: {
-          50: "#f5f3ff",
-          100: "#ede9fe",
-          200: "#ddd6fe",
-          300: "#c4b5fd",
-          400: "#a78bfa",
-          500: "#8b5cf6",
-          600: "#7c3aed",
-          700: "#6d28d9",
-          800: "#5b21b6",
-          900: "#4c1d95",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
