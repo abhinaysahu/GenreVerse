@@ -7,6 +7,7 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const FormData = require("form-data");
 require("dotenv").config();
 
 const app = express();
@@ -21,6 +22,35 @@ app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
 app.use(express.static("public")); // To serve a basic login page or assets
+
+// Add this new middleware function to your server.js
+const authenticateJWT = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if (err) return res.sendStatus(403); // Forbidden
+      req.user = user; // Set the user payload to the request object
+      next();
+    });
+  } else {
+    res.sendStatus(401); // Unauthorized
+  }
+};
+
+// Protect your route by adding the middleware
+app.post(
+  "/api/classify",
+  authenticateJWT,
+  upload.single("audioFile"),
+  async (req, res) => {
+    // Now, req.user.userId contains the user ID from the token
+    // You can use this to save the history in MongoDB
+    console.log("User ID from token:", req.user.userId);
+
+    // ... rest of your existing code
+  }
+);
 
 // Connect to MongoDB
 mongoose
